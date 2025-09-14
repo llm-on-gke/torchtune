@@ -39,17 +39,18 @@ save_adapter_weights_only: True # Set to false to save the whole model + adapter
 
 # Dataset and Sampler
 dataset:
-  _component_: torchtune.datasets.alpaca_cleaned_dataset
-  packed: False  # True increases speed
-  split: train[:95%]
+  _component_: torchtune.datasets.pretokenized_dataset
+  source: regisss/scrolls_gov_report_preprocessed_mlperf_2
+  split: train
 seed: null
 shuffle: True
 
 # Validation
 run_val_every_n_steps: null  # Change to an integer to enable validation every N steps
 dataset_val:
-  _component_: torchtune.datasets.alpaca_cleaned_dataset
-  split: train[95%:]
+  _component_: torchtune.datasets.pretokenized_dataset
+  source: regisss/scrolls_gov_report_preprocessed_mlperf_2
+  split: validation
 batch_size_val: ${batch_size}
 
 # Optimizer and Scheduler
